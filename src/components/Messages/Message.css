@@ -1,0 +1,101 @@
+.message {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    max-width: 80%;
+    position: relative;
+  }
+  
+  .message.sent {
+    flex-direction: row-reverse;
+    margin-left: auto;
+  }
+  
+  .message-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 0 10px;
+  }
+  
+  .message-info {
+    display: flex;
+    flex-direction: column;
+    background-color: #fec7ff; 
+    padding: 9px;
+    border-radius: 10px;
+    position: relative;
+  }
+  
+  .message.sent .message-info {
+    background-color: #dcf8c6;
+  }
+  
+  .message-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  .message-name {
+    place-self: flex-start;
+    font-weight: bold;
+    margin-bottom: 2px;
+    color: #444;
+  }
+  
+  .message-text {
+    color: black;
+    margin: 0;
+    padding: 0px 0;
+  }
+  
+  .message-time {
+    align-self: flex-end;
+    font-size: 0.8em;
+    color: #666;
+    margin-top: 5px;
+  }
+  
+  .message-options {
+    position: absolute;
+    top: 0;
+    left: -20px;
+    /* right: -30px; */
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  
+  .message-options button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .options-dropdown {
+    position: absolute;
+    top: 25px;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+  }
+  
+  .options-dropdown button {
+    display: block;
+    width: 100%;
+    padding: 8px 16px;
+    text-align: left;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+  
+  .options-dropdown button:hover {
+    background-color: #f0f0f0;
+  }
+  

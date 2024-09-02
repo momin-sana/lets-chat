@@ -1,4 +1,4 @@
-/* src/App.css */
+
 
 :root {
   --header-bg: #ffffff;
@@ -29,26 +29,220 @@
   padding: 8px 0;
 }
 
+.logo img{
+  height: 40px;
+}
+
 .logo h1 {
   font-family: 'Comic Sans MS', cursive, sans-serif;
   color: var(--header-color);
   font-size: 24px;
+  margin-left: 10px;
 }
 
-.App-header {
+.login-container {
   flex: 1;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: var(--app-header-bg);
   color: var(--header-color);
-  padding: 20px;
-  height: calc(100vh - 200px); /* Adjust this value to fit your design */
+  height: calc(100vh - 100px); /* Adjust this value to fit your design */
+}
+
+.login-container h1 {
+font-size: 36px;
+}
+
+.login-button {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: var(--header-color);
+  background-color: #00000014;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.login-button span{
+  transition: all 0.5s;
+}
+
+.login-button::before {
+  content: '';
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	opacity: 0;
+	transition: all 1.0s;
+	border-top-width: 1px;
+	border-bottom-width: 2px;
+	border-top-style: solid;
+	border-bottom-style: solid;
+	border-top-color: #ff4081;
+	border-bottom-color: #ff4081;
+	transform: scale(0.1, 1);
+}
+
+.login-button:hover::before {
+  opacity: 1;	
+	transform: scale(1, 1);	
+}
+
+.login-button:hover span{
+  letter-spacing: 1.5px;
+}
+
+.login-button::after{
+  content: '';
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	transition: all 0.3s;
+	background-color: rgba(255,255,255,0.1);
+}
+
+.login-button:hover::after {
+	opacity: 0;	
+	transform: scale(0.1, 1);
+}
+
+.google-logo {
+  margin-right: 10px;
+  width: 20px;
+  height: 20px;
+  transition: transform 0.4s ease;
+}
+
+.login-button:hover .google-logo {
+  transform: rotate(360deg);
 }
 
 footer {
   background-color: var(--footer-bg);
   color: var(--header-color);
-  padding: 10px;
   text-align: center;
+  height: 50px;
+}
+
+/* Responsive Design */
+
+/* Media Queries for Responsive Design */
+
+/* Large Screens (2560 * 1438) */
+@media (min-width: 1800px) {
+
+  .header {
+    padding: 0 0 0 30px;
+  }
+
+  .logo img{
+    height: 76px;
+  }
+
+  .logo h1 {
+    font-size: 46px;
+  }
+
+  .login-container h1 {
+    font-size: 76px;
+  }
+
+  .login-button {
+    font-size: 32px;
+    padding: 16px 32px;
+  }
+
+  footer {
+   font-size: 30px;
+  }
+}
+
+/* Medium-Large Screens (1440 * 809) */
+@media (min-width: 1200px) and (max-width: 1799px) {
+
+  .logo h1 {
+    font-size: 28px;
+  }
+
+  .login-button {
+    font-size: 20px;
+    padding: 14px 28px;
+  }
+}
+
+/* Tablets (768 * 647) */
+@media (min-width: 768px) and (max-width: 1199px) {
+
+
+  .logo h1 {
+    font-size: 24px;
+  }
+
+  .login-button {
+    font-size: 18px;
+    padding: 12px 24px;
+  }
+}
+
+/* Small Tablets and Large Phones (425 * 647, 375) */
+@media (min-width: 425px) and (max-width: 767px) {
+
+  .logo img{
+    height: 34px;
+  }
+
+  .logo h1 {
+    font-size: 20px;
+  }
+
+  .login-container h1 {
+    font-size: 30px;
+  }
+
+  .login-button {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+
+  .login-container {
+    padding: 15px;
+  }
+}
+
+/* Small Phones (320) */
+@media (max-width: 424px) {
+
+  .logo img{
+    height: 36px;
+  }
+
+  .logo h1 {
+    font-size: 15px;
+  }
+
+  .login-container h1 {
+    font-size: 20px;
+  }
+
+  .login-button {
+    font-size: 13px;
+    padding: 8px 16px;
+  }
+
+  .login-container {
+    padding: 10px;
+  }
 }

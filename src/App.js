@@ -1,19 +1,63 @@
-import React, { useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import { ThemeContext } from "./ThemeContext";
+import { loginWithGoogle, auth } from './firebase/firebaseConfig'
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import googleLogo from './assets/img/google.png';
+import Chat from "../src/components/Chat/Chat";
 import "./App.css";
 
 function App() {
+  const [user, setUser] = useState(null); // State to hold the current user information
   const { mode } = useContext(ThemeContext);
+
+  useEffect(() => {
+    // Monitor authentication state changes
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser);
+      } else {
+        setUser(null);
+      }
+    });
+
+    // Clean up subscription on unmount
+    return () => unsubscribe();
+  }, []);
+
+  const handleLogin = async () => {
+    const userData = await loginWithGoogle();
+    if (userData) {
+      console.log("User logged in:", userData);
+      setUser(userData);
+    }
+  };
+
+  const handleLogout = () => {
+    signOut(auth).then(() => {
+      setUser(null);
+    });
+  };
 
   return (
     <div className={`App ${mode}`}>
-      <Header />
+      <Header user={user} handleLogout={handleLogout} />
 
-      <div className="App-header">
-        <h1>Welcome to Let's Chat</h1>
-      </div>
+
+      {user ? (
+        // If the user is logged in, display the Chat component
+        <Chat user={user} />
+      ) : (
+        // If the user is not logged in, display the login screen
+        <div className="login-container">
+          <h1>Welcome to Let's Chat</h1>
+          <button onClick={handleLogin} className="login-button">
+            <img src={googleLogo} alt="Google logo" className="google-logo" />
+            <span>Sign in with Google</span>
+          </button>
+        </div>
+      )}
 
       <Footer />
     </div>
