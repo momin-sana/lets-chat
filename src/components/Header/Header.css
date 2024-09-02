@@ -1,0 +1,35 @@
+:root {
+    --header-bg: #ffffff;
+    --header-color: #333;
+}
+  
+.dark {
+    --header-bg: #000000;
+    --header-color: #ffffff;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--header-bg);
+    padding: 8px 0;
+}
+  
+  .logo {
+    display: flex;
+    margin-left: 10px;
+    align-items: center;
+  }
+  
+  .logo img {
+    width: 40px;
+    margin-right: 10px;
+  }
+  
+  .logo h1 {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    color: var(--header-color);
+    color: rgb(0, 0, 0);
+    font-size: 24px;
+  }
+  
