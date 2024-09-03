@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { db } from "../../firebase/firebaseConfig";
-import { doc, updateDoc, deleteDoc } from "firebase/firestore";
+// import { db } from "../../firebase/firebaseConfig";
+import { updateMessage, deleteMessage } from "./firebaseService"
+// import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import './Message.css';
 
 const Message = ({ message, user }) => {
@@ -9,14 +10,12 @@ const Message = ({ message, user }) => {
   const [showOptions, setShowOptions] = useState(false);
 
   const handleUpdateMessage = async () => {
-    const messageRef = doc(db, "messages", message.id);
-    await updateDoc(messageRef, { text: newMessageText });
+    await updateMessage(message.id, newMessageText);
     setIsEditing(false);
   };
 
   const handleDeleteMessage = async () => {
-    const messageRef = doc(db, "messages", message.id);
-    await deleteDoc(messageRef);
+    await deleteMessage(message.id);
   };
 
   const handleReply = () => {
@@ -28,41 +27,61 @@ const Message = ({ message, user }) => {
     return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   };
 
-    const isSentByCurrentUser = message.uid === user.uid;
+  const isSentByCurrentUser = message.uid === user.uid;
 
   return (
-    <div className={`message ${isSentByCurrentUser ? "sent" : "received"}`}>
+    <div
+      className={`message ${isSentByCurrentUser ? "sent" : "received"}`}
+      onMouseEnter={() => setShowOptions(true)}
+      onMouseLeave={() => setShowOptions(false)}
+    >
       <img src={message.photoURL} alt={`${message.displayName}'s avatar`} className="message-avatar" />
       <div className="message-info">
         <div className="message-header">
-          <span className="message-name">{message.displayName}</span>
-          {isEditing ? (
-            <>
-                <input
-                    type="text"
-                    value={newMessageText}
-                    onChange={(e) => setNewMessageText(e.target.value)}
-                />
-                <button onClick={handleUpdateMessage}>Save</button>
-            </>
+          {!isSentByCurrentUser && (
+            <span className="message-name">{message.displayName}</span>
+          )}
+                   {isEditing ? (
+            <></> // Don't show the text if editing modal is open
           ) : (
             <p className="message-text">{message.text}</p>
           )}
         </div>
         <small className="message-time">{formatTimestamp(message.createdAt)}</small>
-        {isSentByCurrentUser && (
-          <div className="message-options">
-            <button onClick={() => setShowOptions(!showOptions)}>⋮</button>
-            {showOptions && (
-              <div className="options-dropdown">
-                <button onClick={() => setIsEditing(true)}>Edit</button>
-                <button onClick={handleDeleteMessage}>Delete</button>
+        <div className="message-options">
+          <button className="options-button">⋮</button>
+          {showOptions && (
+            <div className="options-dropdown">
+              {isSentByCurrentUser ? (
+                <>
+                  <button onClick={() => setIsEditing(true)}>Edit</button>
+                  <button onClick={handleDeleteMessage}>Delete</button>
+                  <button onClick={handleReply}>Reply</button>
+                </>
+              ) : (
                 <button onClick={handleReply}>Reply</button>
-              </div>
-            )}
-          </div>
-        )}
+              )}
+            </div>
+          )}
+        </div>
       </div>
+
+      {isEditing && (
+        <div className="modal-background in">
+          <div className="modal">
+            <h3>Edit Message</h3>
+            <input
+              type="text"
+              value={newMessageText}
+              onChange={(e) => setNewMessageText(e.target.value)}
+            />
+            <div className="modal-btn">
+              <button onClick={handleUpdateMessage}>Save</button>
+              <button onClick={() => setIsEditing(false)}>Cancel</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

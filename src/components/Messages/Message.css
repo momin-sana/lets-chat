@@ -1,7 +1,7 @@
 .message {
     display: flex;
     align-items: flex-start;
-    margin-bottom: 15px;
+    margin-bottom: 8px;
     max-width: 80%;
     position: relative;
   }
@@ -21,10 +21,12 @@
   .message-info {
     display: flex;
     flex-direction: column;
-    background-color: #fec7ff; 
+    background-color: #fec7ff;
     padding: 9px;
-    border-radius: 10px;
+    border-radius: 9px;
     position: relative;
+    justify-content: space-evenly;
+    padding-right: 30px;
   }
   
   .message.sent .message-info {
@@ -40,11 +42,88 @@
   
   .message-name {
     place-self: flex-start;
-    font-weight: bold;
+    font-weight: lighter;
     margin-bottom: 2px;
     color: #444;
   }
   
+  .modal-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.7); /* Ensures the background is visible */
+    z-index: 1000; /* Ensure it’s above other elements */
+    animation: fadeIn 0.5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+  }
+  
+  .modal-background.out {
+    animation: fadeOut 0.5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+  }
+  
+  .modal {
+    display: flex;
+    background: white;
+    width: 50vw;
+    height: auto;
+    padding: 17px;
+    border-radius: 8px;
+    transform: translateX(-1500px); /* Start off-screen for entrance animation */
+    z-index: 1001;
+    animation: roadRunnerIn 0.3s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+    flex-direction: column;
+    align-content: space-around;
+    align-items: stretch;
+  }
+  
+  .modal-background.out .modal {
+    animation: roadRunnerOut 0.5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
+  }
+  
+.modal h3{
+  align-self: center;
+  color: black;
+}
+
+.modal input{
+  border: none;
+  border-bottom: 2px solid Black;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  line-height: 1.5em;
+  font-size: 16px;
+  outline: none;
+}
+.modal input:focus {
+  color: #ff4081;
+  border-bottom: 2px solid #ff4081;
+}
+
+.modal .modal-btn{
+  margin: 10px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.modal-btn button{
+  border-radius: 8px;
+  padding: 5px;
+  margin: 5px;
+  width: 100vw;
+  font-size: 18px;
+}
+
+.modal-btn button:hover{
+  border-color: #ff4081;
+  color: #ff4081;
+}
+
   .message-text {
     color: black;
     margin: 0;
@@ -61,20 +140,33 @@
   .message-options {
     position: absolute;
     top: 0;
-    left: -20px;
-    /* right: -30px; */
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
+    right: 0;
+    display: none; /* Initially hidden */
+  }
+
+  .message-options button{
+   background-color:rgba(245, 222, 179, 0);
+   border: none;
+   margin: 5px;
+  }
+
+  .message-options button:hover{
+    color: #ff4081;
+   }
+  
+  .message-info:hover .message-options {
+    display: flex; /* Show options on hover */
   }
   
-  .message-options button {
+  .options-button {
     background: none;
     border: none;
     cursor: pointer;
+    font-size: 18px; /* Adjust size as needed */
   }
   
   .options-dropdown {
+    margin: 0 3px;
     position: absolute;
     top: 25px;
     right: 0;
@@ -83,19 +175,69 @@
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     z-index: 100;
+    display: none; /* Initially hidden */
+  }
+  
+  .message-options:hover .options-dropdown {
+    display: block; /* Show dropdown on hover */
   }
   
   .options-dropdown button {
-    display: block;
-    width: 100%;
-    padding: 8px 16px;
+    display: flex;
+    width: 90%;
+    padding: 6px 20px 6px 6px;
     text-align: left;
     border: none;
     background: none;
     cursor: pointer;
+    flex-direction: column;
+    align-items: stretch;
+    align-content: space-around;
+    align-items: flex-start;
   }
   
   .options-dropdown button:hover {
     background-color: #f0f0f0;
   }
   
+
+  @keyframes fadeIn {
+    0% {
+      background:rgba(0,0,0,.0);
+    }
+    100% {
+      background:rgba(0,0,0,.7);
+    }
+  }
+  
+  @keyframes fadeOut {
+    0% {
+      background:rgba(0,0,0,.7);
+    }
+    100% {
+      background:rgba(0,0,0,.0);
+    }
+  }
+  @keyframes roadRunnerIn {
+  0% {
+    transform:translateX(-1500px) skewX(30deg) scaleX(1.3);
+  }
+  70% {
+    transform:translateX(30px) skewX(0deg) scaleX(.9);
+  }
+  100% {
+    transform:translateX(0px) skewX(0deg) scaleX(1);
+  }
+}
+
+@keyframes roadRunnerOut {
+  0% {
+    transform:translateX(0px) skewX(0deg) scaleX(1);
+  }
+  30% {
+    transform:translateX(-30px) skewX(-5deg) scaleX(.9);
+  }
+  100% {
+    transform:translateX(1500px) skewX(30deg) scaleX(1.3);
+  }
+}
