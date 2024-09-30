@@ -63,7 +63,7 @@ html, body {
   align-items: center;
   background-color: var(--app-header-bg);
   color: var(--header-color);
-  height: calc(100vh - 175px);
+  height: calc(100vh - 140px);
 }
 
 .login-container h1 {
