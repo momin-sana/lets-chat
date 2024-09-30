@@ -13,7 +13,7 @@
   justify-content: space-between;
   align-items: center;
   background-color: var(--header-bg);
-  padding: 8px 0;
+  padding: 5px 0;
   flex-shrink: 0; /* Ensures header doesn't shrink */
 }
   
@@ -27,11 +27,11 @@
     font-family: 'Comic Sans MS', cursive, sans-serif;
     color: var(--header-color);
     color: rgb(0, 0, 0);
-    font-size: 24px;
+    font-size: 20px;
   }
   
   .header-controls {
-    margin-right: 5px;
+    margin-right: 12px;
     display: flex;
     align-items: center;
   }

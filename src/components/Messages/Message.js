@@ -1,26 +1,28 @@
 import React, { useState } from "react";
-// import { db } from "../../firebase/firebaseConfig";
-import { updateMessage, deleteMessage } from "./firebaseService"
-// import { doc, updateDoc, deleteDoc } from "firebase/firestore";
+import { updateMessage, deleteMessage} from "./firebaseService"
 import './Message.css';
 
-const Message = ({ message, user }) => {
+const Message = ({ message, user, setIsScrolledUp, onReply}) => {
   const [isEditing, setIsEditing] = useState(false);
   const [newMessageText, setNewMessageText] = useState(message.text);
   const [showOptions, setShowOptions] = useState(false);
 
+
   const handleUpdateMessage = async () => {
     await updateMessage(message.id, newMessageText);
     setIsEditing(false);
+    setIsScrolledUp(false); // Prevent scrolling when a message is updated
   };
 
   const handleDeleteMessage = async () => {
     await deleteMessage(message.id);
+    setIsScrolledUp(false); // Prevent scrolling when a message is updated
   };
 
-  const handleReply = () => {
-    // Logic to reply to a message
-  };
+ // Trigger reply mode
+ const handleReply = () => {
+  onReply(message);  // Call the onReply function passed from Chat
+};
 
   const formatTimestamp = (timestamp) => {
     const date = new Date(timestamp.seconds * 1000);
@@ -37,11 +39,19 @@ const Message = ({ message, user }) => {
     >
       <img src={message.photoURL} alt={`${message.displayName}'s avatar`} className="message-avatar" />
       <div className="message-info">
+        {/* Show the quoted message when replying */}
+        {message.replyingTo && (
+          <div className="quoted-message">
+            <div className="quoted-header">{message.replyingTo.displayName}</div>
+            <div className="quoted-text">{message.replyingTo.text}</div>
+          </div>
+        )}
+    
         <div className="message-header">
           {!isSentByCurrentUser && (
             <span className="message-name">{message.displayName}</span>
           )}
-                   {isEditing ? (
+            {isEditing ? (
             <></> // Don't show the text if editing modal is open
           ) : (
             <p className="message-text">{message.text}</p>
@@ -82,6 +92,7 @@ const Message = ({ message, user }) => {
           </div>
         </div>
       )}
+
     </div>
   );
 };

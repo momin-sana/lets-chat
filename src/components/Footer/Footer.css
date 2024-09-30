@@ -1,16 +1,19 @@
 .footer {
-  height: 65px;
+   font-variant: diagonal-fractions;
+    bottom: 0px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+    height: 55px;    
     text-align: center;
-    padding: 10px 0;
     background-color: #333;
     color: white;
     position: fixed;
     width: 100%;
     flex-shrink: 0;
   }
-  
+
   .footer a {
-    color: #ff4081;
+    color: #45b3fe;
     text-decoration: none;
   }
   

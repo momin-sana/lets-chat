@@ -47,6 +47,14 @@ html, body {
   margin-left: 10px;
 }
 
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 .login-container {
   flex: 1;
   display: flex;
@@ -173,10 +181,6 @@ font-size: 36px;
 /* Medium-Large Screens (1440 * 809) */
 @media (min-width: 1200px) and (max-width: 1799px) {
 
-  .logo h1 {
-    font-size: 28px;
-  }
-
   .login-button {
     font-size: 20px;
     padding: 14px 28px;
@@ -226,7 +230,7 @@ font-size: 36px;
 @media (max-width: 424px) {
 
   .logo img{
-    height: 36px;
+    height: 26px;
   }
 
   .logo h1 {

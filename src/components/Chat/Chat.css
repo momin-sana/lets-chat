@@ -1,9 +1,10 @@
 .chat-container {
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 155px);
+    height: calc(100vh - 140px);
     background-color: var(--app-header-bg);
     color: var(--header-color);
+    padding: 0 70px;
   }
   
   .chat-header {
@@ -14,39 +15,150 @@
     background-color: var(--app-header-bg);
     color: var(--header-color);
   }
+
   .messages {
     flex: 1;
     padding: 10px;
     overflow-y: auto;
   }
-  
-  .send-message {
-    display: flex;
-    padding: 10px;
-    background-color: var(--app-header-bg);
-    color: var(--header-color);
-    border-top: 1px solid #e0e0e0;
-  }
-  
-  .send-message input {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    margin-right: 10px;
-  }
-  
-  .send-message button {
-    padding: 10px 20px;
-    color: white;
-    background-color: #ff4081;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .send-message button:hover {
-    background-color: #ff79b0;
-  }
+
+  /* For WebKit browsers (Chrome, Safari, Edge) */
+.messages::-webkit-scrollbar {
+  width: 8px;
+}
+
+.messages::-webkit-scrollbar-track {
+  background: #f1f1f125;  /* Background of the scrollbar track */
+}
+
+.messages::-webkit-scrollbar-thumb {
+  background-color: #45b3fe;   /* Scrollbar color */
+  border-radius: 5px;       /* Rounded scrollbar */
+  border: 2px solid #f1f1f10f; /* Create space between track and thumb */
+}
+
+.messages::-webkit-scrollbar-thumb:hover {
+  background-color: #45b3fe; /* Darken on hover */
+  box-shadow: rgba(255, 255, 255, 0.3) 0px 0px 5px 2px;
+}
+
+.scroll-down-button {
+  position: fixed;
+  bottom: 150px;
+  right: 20px;
+  background-color: #5a5a5a;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 10px 15px;
+  /* font-size: 20px; */
+  cursor: pointer;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.scroll-down-button:hover {
+  background-color: #1a1a1a;
+  box-shadow: rgba(255, 255, 255, 0.3) 0px 0px 5px 2px;
+}
+
+.reply-input{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background-color: var(--app-header-bg);
+  color: var(--header-color);
+  border-top: 1px solid #e0e0e0;
+}
+
+
+.quoted-message{
+  width: -webkit-fill-available;
+  background-color: #e0e0e0;
+  border-left: 4px solid #34b7f1;
+  padding: 5px;
+  margin-bottom: 5px;
+  border-radius: 7px;
+}
+
+.cancel-reply-button {
+  background: none;
+  border: none;
+  /* font-size: 10px; */
+  cursor: pointer;
+  color: #888;
+  align-self: center;
+}
+
+.cancel-reply-button:hover {
+  color: #000;
+}
+
+
+.reply-input-text-button{
+  display: flex;
+  background-color: var(--app-header-bg);
+  color: var(--header-color);
+    width: -webkit-fill-available;
+  padding: 5px;
+  margin-bottom: 5px;
+  border-radius: 7px;
+}
+
+.reply-input input {
+  flex: 1;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  margin-right: 10px;
+}
+
+.reply-input button {
+  padding: 10px 20px;
+  color: rgb(0, 0, 0);
+  background-color: #45b3fe;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.reply-input button:hover {
+  background-color: #ff79b0;
+}
+
+.send-message {
+  display: flex;
+  padding: 10px;
+  background-color: var(--app-header-bg);
+  color: var(--header-color);
+  border-top: 1px solid #e0e0e0;
+}
+
+.send-message input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  margin-right: 10px;
+}
+
+.send-message button {
+  font-weight: bold;
+  padding: 10px 20px;
+  color: rgb(0, 0, 0);
+  background-color: #45b3fe;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.send-message button:hover {
+  background-color: #84ccfc;
+  box-shadow: rgba(255, 255, 255, 0.3) 0px 0px 5px 2px;
+}
   

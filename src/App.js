@@ -10,16 +10,20 @@ import "./App.css";
 
 function App() {
   const [user, setUser] = useState(null); // State to hold the current user information
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true); // State to manage loading
   const { mode } = useContext(ThemeContext);
+
 
   useEffect(() => {
     // Monitor authentication state changes
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      
       if (currentUser) {
         setUser(currentUser);
       } else {
         setUser(null);
       }
+      setIsCheckingAuth(false); // Stop showing the loader after auth state is determined
     });
 
     // Clean up subscription on unmount
@@ -29,7 +33,6 @@ function App() {
   const handleLogin = async () => {
     const userData = await loginWithGoogle();
     if (userData) {
-      console.log("User logged in:", userData);
       setUser(userData);
     }
   };
@@ -40,6 +43,14 @@ function App() {
     });
   };
 
+  if (isCheckingAuth) {
+    return (
+      <div className="loading-container">
+        <h1>Checking authentication...</h1>
+      </div>
+    );
+  }
+  
   return (
     <div className={`App ${mode}`}>
       <Header user={user} handleLogout={handleLogout} />
