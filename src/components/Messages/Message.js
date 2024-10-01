@@ -69,7 +69,12 @@ const Message = ({ message, user, setIsScrolledUp, onReply}) => {
                   <button onClick={handleReply}>Reply</button>
                 </>
               ) : (
+                <>
                 <button onClick={handleReply}>Reply</button>
+                {/* <button onClick={handleDeleteMessage}>Delete</button> */}
+                </>
+                
+                
               )}
             </div>
           )}
