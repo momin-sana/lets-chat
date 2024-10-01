@@ -2,7 +2,23 @@
 
 ## Overview
 
+**Let's Chat** is a real-time chat application built using **React**, **Firebase Authentication**, and **Firestore** as the database. Users can authenticate via Google sign-in, send and reply to messages in a real-time chat interface, and manage their own messages, including editing, replying, and deleting messages. The app also supports clearing all chat messages with confirmation. 
+
+Sure! Here's the updated **README** file with your provided link included:
+
+---
+
+# Let's Chat - A Real-Time Chat Application
+
+## Overview
+
 **Let's Chat** is a real-time chat application built using **React**, **Firebase Authentication**, and **Firestore** as the database. Users can authenticate via Google sign-in, send and reply to messages in a real-time chat interface, and manage their own messages, including editing, replying, and deleting messages. The app also supports clearing all chat messages with confirmation.
+
+
+### Live Demo
+
+You can try the live demo of the application [here](https://momin-sana.github.io/lets-chat/).
+
 
 ## Features
 
